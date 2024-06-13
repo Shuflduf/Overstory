@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://dc2ucl4rxpfls"]
+
+[ext_resource type="PackedScene" uid="uid://dce77ktn31d03" path="res://arena.tscn" id="1_onnfa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3xtb"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f8aba"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_y3xtb")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -140.0
+offset_top = -324.0
+offset_right = 140.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_f8aba")
+metadata/_edit_group_ = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="PanelContainer"]
+layout_mode = 2
+stretch = true
+
+[node name="Arena" parent="PanelContainer/SubViewportContainer" instance=ExtResource("1_onnfa")]
+handle_input_locally = false
+size = Vector2i(280, 280)
+render_target_update_mode = 4
