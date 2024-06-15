@@ -1,0 +1,122 @@
+[gd_scene load_steps=11 format=3 uid="uid://dc2ucl4rxpfls"]
+
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_fvt0x"]
+[ext_resource type="PackedScene" uid="uid://dce77ktn31d03" path="res://ui/arena.tscn" id="1_ivuqi"]
+[ext_resource type="Texture2D" uid="uid://l4vmf337e238" path="res://assets/fight.png" id="2_b5v4l"]
+[ext_resource type="Texture2D" uid="uid://c14vfebgek4q3" path="res://assets/act.png" id="3_nelnl"]
+[ext_resource type="Texture2D" uid="uid://dfoypl8shpsgq" path="res://assets/item.png" id="4_4qtmb"]
+[ext_resource type="Texture2D" uid="uid://b16h48rs4auip" path="res://assets/mercy.png" id="5_ooj2a"]
+[ext_resource type="Texture2D" uid="uid://cffcm2e750n81" path="res://assets/focus.png" id="7_woylv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0nj4n"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k6rs7"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dl1yd"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fvt0x")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0nj4n")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.417
+anchor_top = 0.444662
+anchor_right = 0.583
+anchor_bottom = 0.740662
+offset_left = -0.384033
+offset_top = -0.141022
+offset_right = 0.383972
+offset_bottom = 0.0509644
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_k6rs7")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dl1yd")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="PanelContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+stretch = true
+
+[node name="Arena" parent="PanelContainer/MarginContainer/PanelContainer/SubViewportContainer" instance=ExtResource("1_ivuqi")]
+handle_input_locally = false
+size = Vector2i(172, 172)
+render_target_update_mode = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0581597
+anchor_top = 0.800926
+anchor_right = 0.94184
+anchor_bottom = 0.967593
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Fight" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_b5v4l")
+stretch_mode = 5
+
+[node name="Act" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_nelnl")
+stretch_mode = 5
+
+[node name="Item" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_4qtmb")
+stretch_mode = 5
+
+[node name="Mercy" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("5_ooj2a")
+stretch_mode = 5
+
+[node name="Focus" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = -0.559998
+offset_top = 111.703
+offset_right = -422.453
+offset_bottom = 100.126
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 13.345)
+texture = ExtResource("7_woylv")
+stretch_mode = 5
