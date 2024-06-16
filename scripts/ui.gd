@@ -1,7 +1,7 @@
 extends Control
 
 @onready var focus = $Focus
-@onready var actions: Array[Node] = $HBoxContainer.get_children()
+@onready var actions: Array[Node] = %Actions.get_children()
 var action_index := 0
 
 func _input(event):

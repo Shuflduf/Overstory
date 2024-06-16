@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://dc2ucl4rxpfls"]
+[gd_scene load_steps=16 format=3 uid="uid://dc2ucl4rxpfls"]
 
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_fvt0x"]
 [ext_resource type="PackedScene" uid="uid://dce77ktn31d03" path="res://ui/arena.tscn" id="1_ivuqi"]
 [ext_resource type="Texture2D" uid="uid://l4vmf337e238" path="res://assets/fight.png" id="2_b5v4l"]
+[ext_resource type="FontFile" uid="uid://cmmcm0hcrps0c" path="res://assets/fonts/8bitoperator.ttf" id="3_8gb2y"]
 [ext_resource type="Texture2D" uid="uid://c14vfebgek4q3" path="res://assets/act.png" id="3_nelnl"]
 [ext_resource type="Texture2D" uid="uid://dfoypl8shpsgq" path="res://assets/item.png" id="4_4qtmb"]
+[ext_resource type="Texture2D" uid="uid://bo8trtr78lmcx" path="res://assets/hpbarunder.png" id="4_wa56h"]
+[ext_resource type="Texture2D" uid="uid://dy4bh0204vpra" path="res://assets/hpbarover.png" id="5_dew3s"]
 [ext_resource type="Texture2D" uid="uid://b16h48rs4auip" path="res://assets/mercy.png" id="5_ooj2a"]
 [ext_resource type="Texture2D" uid="uid://cffcm2e750n81" path="res://assets/focus.png" id="7_woylv"]
 
@@ -17,6 +20,14 @@ bg_color = Color(1, 1, 1, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dl1yd"]
 bg_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_000tt"]
+font = ExtResource("3_8gb2y")
+font_size = 36
+
+[sub_resource type="LabelSettings" id="LabelSettings_17xjy"]
+font = ExtResource("3_8gb2y")
+font_size = 21
+
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -26,7 +37,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fvt0x")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="BG" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,44 +46,93 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0nj4n")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="Arena" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.417
-anchor_top = 0.444662
+anchor_top = 0.417
 anchor_right = 0.583
-anchor_bottom = 0.740662
-offset_left = -0.384033
-offset_top = -0.141022
+anchor_bottom = 0.714
+offset_left = -0.384003
+offset_top = -11.916
 offset_right = 0.383972
-offset_bottom = 0.0509644
+offset_bottom = -12.3721
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_k6rs7")
 metadata/_edit_use_anchors_ = true
 metadata/_edit_group_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Arena"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Arena/MarginContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dl1yd")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="PanelContainer/MarginContainer/PanelContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Arena/MarginContainer/PanelContainer"]
 layout_mode = 2
 stretch = true
 
-[node name="Arena" parent="PanelContainer/MarginContainer/PanelContainer/SubViewportContainer" instance=ExtResource("1_ivuqi")]
+[node name="Arena" parent="Arena/MarginContainer/PanelContainer/SubViewportContainer" instance=ExtResource("1_ivuqi")]
 handle_input_locally = false
-size = Vector2i(172, 172)
+size = Vector2i(172, 171)
 render_target_update_mode = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="Info" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0763889
+anchor_top = 0.714506
+anchor_right = 0.729687
+anchor_bottom = 0.798173
+offset_right = 0.399994
+offset_bottom = 0.783997
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Info"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Shuf"
+label_settings = SubResource("LabelSettings_000tt")
+
+[node name="LV" type="Label" parent="Info"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "LV 10"
+label_settings = SubResource("LabelSettings_000tt")
+
+[node name="HP" type="Label" parent="Info"]
+layout_mode = 2
+text = "HP
+"
+label_settings = SubResource("LabelSettings_17xjy")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Info"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+value = 92.0
+nine_patch_stretch = true
+stretch_margin_left = 150
+stretch_margin_top = 40
+texture_under = ExtResource("4_wa56h")
+texture_progress = ExtResource("5_dew3s")
+
+[node name="LV2" type="Label" parent="Info"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = " 56/56"
+label_settings = SubResource("LabelSettings_000tt")
+
+[node name="Actions" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0581597
@@ -84,25 +144,25 @@ grow_vertical = 2
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Fight" type="TextureRect" parent="HBoxContainer"]
+[node name="Fight" type="TextureRect" parent="Actions"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("2_b5v4l")
 stretch_mode = 5
 
-[node name="Act" type="TextureRect" parent="HBoxContainer"]
+[node name="Act" type="TextureRect" parent="Actions"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("3_nelnl")
 stretch_mode = 5
 
-[node name="Item" type="TextureRect" parent="HBoxContainer"]
+[node name="Item" type="TextureRect" parent="Actions"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("4_4qtmb")
 stretch_mode = 5
 
-[node name="Mercy" type="TextureRect" parent="HBoxContainer"]
+[node name="Mercy" type="TextureRect" parent="Actions"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("5_ooj2a")
